@@ -1,34 +1,30 @@
 {
   "12": [
     "GameDevBlogADay", 
-    "GameDevBlogADay_12.recipe"
-  ], 
-  "5": [
-    "Ars Technica", 
-    "ArsTechnica.recipe"
-  ], 
-  "17": [
-    "Penny Arcade Report", 
-    "PA_Report.recipe"
-  ], 
-  "7": [
-    "Canadian Tech Policy", 
-    "Canadian Tech Policy_7.recipe"
-  ], 
-  "16": [
-    "Tested", 
-    "Tested.recipe"
-  ], 
-  "9": [
-    "Whiskey Media", 
-    "Whiskey Media_9.recipe"
+    "GameDevBlogADay.recipe"
   ], 
   "15": [
     "PA_Report", 
     "PA_Report_15.recipe"
   ], 
-  "4": [
-    "Ars Technica - mine", 
-    "Ars Technica - mine_4.recipe"
+  "17": [
+    "Penny Arcade Report", 
+    "PA_Report.recipe"
+  ], 
+  "16": [
+    "Tested", 
+    "Tested.recipe"
+  ], 
+  "5": [
+    "Ars Technica", 
+    "ArsTechnica.recipe"
+  ], 
+  "7": [
+    "Canadian Tech Policy", 
+    "Canadian Tech Policy_7.recipe"
+  ], 
+  "9": [
+    "Whiskey Media", 
+    "Whiskey Media_9.recipe"
   ]
 }
