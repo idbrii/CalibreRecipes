@@ -1,6 +1,29 @@
+import re
+
 class GameDevBlogADay(BasicNewsRecipe):
     title          = u'GameDevBlogADay'
     oldest_article = 14
     max_articles_per_feed = 20
 
     feeds          = [(u'Blog', u'http://altdevblogaday.com/feed/')]
+
+    cover_url = 'http://altdevblogaday.com/wp-content/uploads/2012/01/altdevblogaday.jpg'
+
+    # Don't use the articles embedded in the feed. They don't work.
+    # doesn't fix it: use_embedded_content = False
+
+    # TODO: how do I get code to show up?
+    # code: http://altdevblogaday.com/2012/02/22/comparing-floating-point-numbers-2012-edition/
+    #def get_article_url(self, article):
+    #    ignored = [
+    #        'Why',
+    #        'Jump',
+    #        'Constraint',
+    #        ]
+    #    for title in ignored:
+    #        article_title = article.get('title', None)
+    #        if re.match(title, article_title) is not None:
+    #            return None
+
+    #    # fallback to default
+    #    return BasicNewsRecipe.get_article_url(self, article)
