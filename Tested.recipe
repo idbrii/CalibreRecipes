@@ -39,7 +39,7 @@ class Tested(BasicNewsRecipe):
     def get_article_url(self, article):
         ignored = [
             'The Amazing Test:',
-            'Episode [0-9] - *',
+            'Episode [0-9]* -',
             'App of the Day:',
             ]
         for title in ignored:
