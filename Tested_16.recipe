@@ -1,0 +1,51 @@
+import re
+
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class Tested(BasicNewsRecipe):
+    __author__ = 'david'
+    title          = u'Tested'
+    description    = u'Full of testing'
+    oldest_article = 30
+    max_articles_per_feed = 100
+
+    feeds = [(u'Articles', u'http://feeds2.feedburner.com/TestedAll')]
+
+    language = 'en_US'
+
+    cover_url = 'http://media.tested.com/static/vine/img/generic/logo-above-search-2.png'
+
+    # Don't use the articles embedded in the feed. They have junk in them ("TEASER")
+    use_embedded_content = False
+
+    # Removes empty feeds - why keep them!?
+    remove_empty_feeds = True
+
+    keep_only_tags = [
+        dict(id=['news-page'])
+        ]
+    remove_tags = [
+        dict(name='ul', attrs={ 'id':'js-mid-promo' }),
+        dict(name='div', attrs={ 'id':'aside' }),
+        dict(name='div', attrs={ 'class':'social' }),
+        dict(name='div', attrs={ 'id':'news-section' }),
+        dict(name='div', attrs={ 'class':re.compile('.*instapaper_ignore.*') }),
+        ]
+
+    no_stylesheets = True
+
+    conversion_options = { 'smarten_punctuation' : True }
+
+    def get_article_url(self, article):
+        ignored = [
+            'The Amazing Test:',
+            'Episode [0-9] - *',
+            'App of the Day:',
+            ]
+        for title in ignored:
+            article_title = article.get('title', None)
+            if re.match(title, article_title) is not None:
+                return None
+
+        # fallback to default
+        return BasicNewsRecipe.get_article_url(self, article)

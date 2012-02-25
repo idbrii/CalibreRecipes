@@ -1,0 +1,6 @@
+class BasicUserRecipe1328891420(AutomaticNewsRecipe):
+    title          = u'GameDevBlogADay'
+    oldest_article = 14
+    max_articles_per_feed = 20
+
+    feeds          = [(u'Blog', u'http://altdevblogaday.com/feed/')]

@@ -1,0 +1,48 @@
+import re
+
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class PAReport(BasicNewsRecipe):
+    __author__ = 'david'
+    title          = u'Penny Arcade Report'
+    description    = u'Ben reports on games'
+    oldest_article = 7
+    max_articles_per_feed = 100
+
+    feeds          = [(u'Editorial', u'http://feeds.penny-arcade.com/pa-report')]
+
+    language = 'en_US'
+
+    cover_url = 'http://hw1.pa-cdn.com/par/img/img_bkuchera_sml.jpg'
+
+    # PA does not have full articles embedded in the feed.
+    use_embedded_content = False
+
+    # Removes empty feeds - why keep them!?
+    remove_empty_feeds = True
+
+    keep_only_tags = [
+        dict(id=['content', 'leftCol', 'post', 'body'])
+        ]
+    remove_tags = [
+        dict(name='ul', attrs={ 'class':'social' }),
+        dict(name='ul', attrs={ 'class':'topics' }),
+        dict(name='ul', attrs={ 'id':'pagination' }),
+        dict(name='div', attrs={ 'id':'vanilla-comments' }),
+        dict(name='div', attrs={ 'class':'vanilla-credit' }),
+        ]
+
+    no_stylesheets = True
+
+    conversion_options = { 'smarten_punctuation' : True }
+
+    ignoreCutArticles = True
+    def get_article_url(self, article):
+        # The cut are just links.
+        if self.ignoreCutArticles:
+            article_title = article.get('title',None)
+            if re.match('PAR The Cut: ',article_title) is not None:
+                return None
+
+        # fallback to default
+        return BasicNewsRecipe.get_article_url(self, article)

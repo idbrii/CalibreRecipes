@@ -1,0 +1,12 @@
+class CanadianTechPolicy(BasicNewsRecipe):
+    title          = u'Canadian Tech Policy'
+    __author__     = 'Michael Geist'
+    oldest_article = 30
+    max_articles_per_feed = 100
+    description    = 'Canadian technology news'
+    publisher      = ''
+    category       = 'internet, canada'
+    language       = 'en'
+    encoding      = 'utf-8'
+
+    feeds          = [(u"Michael Geist's Blog", u'http://feeds.feedburner.com/MichaelGeistsBlog')]

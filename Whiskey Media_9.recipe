@@ -1,0 +1,6 @@
+class BasicUserRecipe1329201986(AutomaticNewsRecipe):
+    title          = u'Whiskey Media'
+    oldest_article = 30
+    max_articles_per_feed = 100
+
+    feeds          = [(u'Giantbomb Reviews', u'http://www.giantbomb.com/feeds/reviews/'), (u'Giantbomb News', u'http://www.giantbomb.com/feeds/news/')]
