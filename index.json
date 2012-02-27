@@ -3,17 +3,13 @@
     "GameDevBlogADay", 
     "GameDevBlogADay.recipe"
   ], 
-  "15": [
-    "PA_Report", 
-    "PA_Report_15.recipe"
-  ], 
   "17": [
     "Penny Arcade Report", 
     "PA_Report.recipe"
   ], 
   "16": [
-    "Tested", 
-    "Tested.recipe"
+    "Whiskey Media", 
+    "WhiskeyMedia.recipe"
   ], 
   "5": [
     "Ars Technica", 
@@ -23,8 +19,4 @@
     "Canadian Tech Policy", 
     "Canadian Tech Policy_7.recipe"
   ], 
-  "9": [
-    "Whiskey Media", 
-    "Whiskey Media_9.recipe"
-  ]
 }

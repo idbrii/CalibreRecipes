@@ -2,34 +2,45 @@ import re
 
 from calibre.web.feeds.recipes import BasicNewsRecipe
 
-class Tested(BasicNewsRecipe):
-    __author__ = 'david'
-    title          = u'Tested'
-    description    = u'Full of testing'
+class WhiskeyMedia(BasicNewsRecipe):
+    __author__ = 'pydave'
+    title          = u'Whiskey Media'
+    description    = u'Makers of fine websites'
     oldest_article = 30
     max_articles_per_feed = 100
 
-    feeds = [(u'Articles', u'http://feeds2.feedburner.com/TestedAll')]
+    feeds = [(u'Tested Articles', u'http://feeds2.feedburner.com/TestedAll'),
+             (u'Giantbomb News', u'http://www.giantbomb.com/feeds/news/'),
+             (u'Giantbomb Reviews', u'http://www.giantbomb.com/feeds/reviews/'), 
+            ]
 
     language = 'en_US'
 
-    cover_url = 'http://media.tested.com/static/vine/img/generic/logo-above-search-2.png'
+    cover_url = 'http://upload.wikimedia.org/wikipedia/en/2/25/Whiskey_Media_logo.jpg'
 
-    # Don't use the articles embedded in the feed. They have junk in them ("TEASER")
+    # Don't use the articles embedded in the feed. Tested ones have junk in
+    # them ("TEASER") and GB ones are missing the byline.
     use_embedded_content = False
 
     # Removes empty feeds - why keep them!?
     remove_empty_feeds = True
 
     keep_only_tags = [
-        dict(id=['news-page'])
+        dict(name='div', attrs={ 'class':re.compile('.*instapaper_body.*') }),
+        dict(id=['news-page']),
+        dict(name='div', attrs={ 'class':'section-bd' }),
         ]
     remove_tags = [
+        # Tested
         dict(name='ul', attrs={ 'id':'js-mid-promo' }),
         dict(name='div', attrs={ 'id':'aside' }),
         dict(name='div', attrs={ 'class':'social' }),
         dict(name='div', attrs={ 'id':'news-section' }),
+        # Giant Bomb Reviews
+        dict(name='div', attrs={ 'class':'top-title-tabs dn' }),
+        dict(name='div', attrs={ 'class':'user' }),
         dict(name='div', attrs={ 'class':re.compile('.*instapaper_ignore.*') }),
+        dict(name='div', attrs={ 'class':re.compile('.*aside.*') }),
         ]
 
     no_stylesheets = True
@@ -38,6 +49,7 @@ class Tested(BasicNewsRecipe):
 
     def get_article_url(self, article):
         ignored = [
+            # Tested
             'The Amazing Test:',
             'Episode [0-9]* -',
             'App of the Day:',
