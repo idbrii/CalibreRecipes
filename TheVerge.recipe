@@ -1,0 +1,54 @@
+import re
+
+from calibre.web.feeds.recipes import BasicNewsRecipe
+
+class TheVerge(BasicNewsRecipe):
+    title          = u'TheVerge'
+    oldest_article = 7
+    max_articles_per_feed = 100
+
+    feeds          = [(u'Vox Games', u'http://www.theverge.com/gaming/rss/index.xml'),
+                      (u'Verge Android', u'http://www.theverge.com/android/rss/index.xml'),
+                      (u'Verge Law', u'http://www.theverge.com/policy/rss/index.xml'),
+                      (u'Verge Culture', u'http://www.theverge.com/culture/rss/index.xml'),
+                      (u'Verge Apple', u'http://www.theverge.com/apple/rss/index.xml'),
+                      (u'Verge Software', u'http://www.theverge.com/apps/rss/index.xml')]
+
+    cover_url = 'http://upload.wikimedia.org/wikipedia/en/f/f8/The-Verge-Logo.png'
+
+    # I think I cannot use remove_tags unless I don't use embedded content?
+    use_embedded_content = False
+
+    # Removes empty feeds - why keep them!?
+    remove_empty_feeds = True
+
+    keep_only_tags = [
+        dict(name='h1', attrs={ 'class':'headline' }),
+        dict(name='a', attrs={ 'class':'author' }),
+        dict(name='span', attrs={ 'class':'publish-date' }),
+        dict(name='div', attrs={ 'class':'story-image shadowbox' }),
+        dict(name='div', attrs={ 'class':'article-body' }),
+    ]
+
+    remove_tags = [
+        dict(name='div', attrs={ 'class':re.compile('.*clearfix.*') }),
+        #dict(name='div', attrs={ 'class':re.compile('.*instapaper_ignore.*') }),
+    ]
+
+    no_stylesheets = True
+
+    conversion_options = { 'smarten_punctuation' : True }
+
+    def get_article_url(self, article):
+        ignored = [
+            # Tested
+            'The Besties Podcast',
+            'The Vergecast',
+            ]
+        for title in ignored:
+            article_title = article.get('title', None)
+            if re.match(title, article_title) is not None:
+                return None
+
+        # fallback to default
+        return BasicNewsRecipe.get_article_url(self, article)

@@ -23,4 +23,4 @@ env = Environment()
 add_custom_builder(env)
 
 # Define Explicit Targets
-Default(env.Book('Tested.recipe'))
+Default(env.Book('TheVerge.recipe'))
